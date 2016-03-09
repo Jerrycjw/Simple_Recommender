@@ -22,11 +22,11 @@ def calculate_Top_5(app, user_download_history):
 	for apps in user_download_history:
 		similarity = Helper.cosine_similarity([app],apps)
 		for other_app in apps:
-			if app_similarity.has_key(other_app):
+			if other_app in app_similarity:
 				app_similarity[other_app] = app_similarity[other_app]+similarity
 			else:
 				app_similarity[other_app] = similarity
-	if not app_similarity.has_key(app):
+	if app not in app_similarity:
 		return
 	app_similarity.pop(app)##Pop itself
 	sorted_tups = sorted(app_similarity.items(), key=operator.itemgetter(1), reverse=True)
